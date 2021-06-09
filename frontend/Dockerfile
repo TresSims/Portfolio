@@ -1,10 +1,10 @@
-FROM node:14
+FROM node:latest
 
 RUN mkdir /code
 WORKDIR /code
 
 COPY package.json .
-COPY package-lock.json .
+COPY yarn.lock .
 
 RUN yarn install
 
