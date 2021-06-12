@@ -2,7 +2,7 @@
   "kind": "collectionType",
   "collectionName": "projects",
   "info": {
-    "name": "Projects",
+    "name": "Articles",
     "description": ""
   },
   "options": {
@@ -23,6 +23,22 @@
     "categories": {
       "via": "projects",
       "collection": "categories"
+    },
+    "blurb": {
+      "type": "text",
+      "required": true
+    },
+    "thumb": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
     }
   }
 }
