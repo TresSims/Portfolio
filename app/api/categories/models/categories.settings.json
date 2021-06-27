@@ -21,6 +21,13 @@
       "via": "categories",
       "collection": "projects",
       "dominant": true
+    },
+    "color": {
+      "type": "string",
+      "default": "#5e8c87",
+      "required": true,
+      "unique": false,
+      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
     }
   }
 }

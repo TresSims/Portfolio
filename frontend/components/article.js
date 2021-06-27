@@ -1,21 +1,27 @@
-import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
+import { getMediaURL } from '../lib/api.js';
+import CategoryList from './categoryList.js';
+import Link from 'next/link';
+import { fetchAPI } from '../lib/api.js';
 
 const Article = ({ article }) => {
+  const thumb = getMediaURL(article.thumb.url);
+
+  console.log(article);
   return (
-    <Card id={article.id}>
-      <CardMedia image="" />
-      <CardContent>
-        <Typography variant="h5" component="h2">
-          {article.name}
-        </Typography>
-        <Typography variant="body2" component="p">
-          {article.short}
-        </Typography>
-      </CardContent>
-    </Card>
+    <Link href={`/article/${encodeURIComponent(article.id)}`}>
+      <div
+        className="card"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7)), url(${thumb})`,
+        }}
+      >
+        <div>
+          <h3>> {article.name}</h3>
+          <font>{article.blurb}</font>
+          {article.categories && <CategoryList categories={article.categories} />}
+        </div>
+      </div>
+    </Link>
   );
 };
 
