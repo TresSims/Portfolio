@@ -1,7 +1,7 @@
 :3000
 
 handle_path /api* {
-	   reverse_proxy backend:1337   
+  reverse_proxy backend:1337
 }
 
 reverse_proxy frontend:3000 {

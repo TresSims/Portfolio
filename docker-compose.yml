@@ -8,7 +8,9 @@ services:
           - 3001:1337
         restart: unless-stopped
     frontend:
-        build: frontend
+        build: 
+          context: frontend
+          dockerfile: Dockerfile.local
         volumes:
             - /code/node_modules
             - ./frontend:/code

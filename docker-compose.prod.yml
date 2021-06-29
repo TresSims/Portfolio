@@ -1,0 +1,37 @@
+version: '3'
+services:
+    backend:
+        image: strapi/strapi
+        volumes:
+            - ./app:/srv/app
+        ports:
+          - 127.0.0.1:3001:1337
+        environment:
+          - DATABASE_CLIENT=postgres
+          - DATABASE_NAME=postgres
+          - DATABASE_HOST=db
+          - DATABASE_PORT=5432
+          - DATABASE_USERNAME=postgres
+          - DATABASE_PASSWORD=postgres
+        restart: unless-stopped
+    frontend:
+        build: frontend
+        restart: unless-stopped
+        depends_on:
+          - backend
+    reverse-proxy:
+      depends_on:
+        - frontend
+        - backend
+      image: caddy:latest
+      ports:
+        - 127.0.0.1:3000:3000
+      volumes:
+        - ./Caddyfile:/etc/caddy/Caddyfile
+      restart: unless-stopped
+    db:
+      image: postgres:latest
+      volumes:
+        - /opt/portfolio-data:/var/lib/postgresql/data
+      environment:
+        - POSTGRES_PASSWORD=postgres

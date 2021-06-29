@@ -7,7 +7,7 @@ export function getStrapiURL(path = '') {
 }
 
 export function getMediaURL(path = '') {
-  let finalPath = 'http://localhost:3000/api' + path;
+  let finalPath = '/api' + path;
   console.log(finalPath);
   return finalPath;
 }
