@@ -47,22 +47,10 @@ const Article = ({ articles, article }) => {
 
 export default Article;
 
-export async function getStaticPaths() {
-  const articles = await fetchAPI('/projects');
-
-  return {
-    paths: articles.map(article => ({
-      params: {
-        id: `${article.id}`,
-      },
-    })),
-    fallback: false,
-  };
-}
-
-export async function getStaticProps({ params }) {
-  const article = (await fetchAPI(`/projects?id=${params.id}`))[0];
-  const articles = await fetchAPI('/projects');
+export async function getServerSideProps(context) {
+    const { id } = context.query;
+    const article = (await fetchAPI(`/projects?id=${id}`))[0];
+    const articles = await fetchAPI('/projects');
   return {
     props: { articles, article },
   };

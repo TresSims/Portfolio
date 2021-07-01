@@ -19,21 +19,9 @@ const Category = ({ categories, category }) => {
 
 export default Category;
 
-export async function getStaticPaths() {
-  const categories = await fetchAPI('/categories');
-
-  return {
-    paths: categories.map(category => ({
-      params: {
-        id: `${category.id}`,
-      },
-    })),
-    fallback: false,
-  };
-}
-
-export async function getStaticProps({ params }) {
-  const category = (await fetchAPI(`/categories?id=${params.id}`))[0];
+export async function getServerSideProps(context) {
+  const { id } = context.query;
+  const category = (await fetchAPI(`/categories?id=${id}`))[0];
   const categories = await fetchAPI('/categories');
   return {
     props: { categories, category },
