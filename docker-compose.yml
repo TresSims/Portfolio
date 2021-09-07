@@ -1,7 +1,9 @@
 version: '3'
 services:
     backend:
-        image: strapi/strapi
+        build:
+          context: app
+          dockerfile: Dockerfile
         volumes:
             - ./app:/srv/app
         ports:
@@ -21,6 +23,8 @@ services:
         volumes:
             - /code/node_modules
             - ./frontend:/code
+        environment:
+          - ANALYTICS=G-FTHGLGM87J
         restart: unless-stopped
     reverse-proxy:
       depends_on:
